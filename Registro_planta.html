@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Registrar una planta</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Latest compiled JavaScript -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <link rel="stylesheet" href="css/estilosGreenkeeper.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
+</head>
+
+<body>
+
+  <div class="btn btn-success position-fixed start-0 top-50 translate-middle-y m-3">
+    <a href="GreenkeeperIndex.html" class="text-white"><i class="bi bi-house"></i></a>
+  </div>
+  <button class="btn btn-primary d-flex " onclick="history.back() ">Volver</button>
+  <div class="row my-3">
+    <div class="col-sm-6 offset-sm-3" id="formuplanta">
+
+      <!-- Atributos del formulario
+            action: redireccionar al servidor
+            tarjet: muestra los datos misma pestaña(_blank) u otra venta (_self)
+            method: especifica la forma de envio de datos del formulario
+            get: variable dentro de la url
+            post: transaccion -->
+
+      <form action="/Registro_planta.php" tarjet="" method="post" enctype="multipart/form-data">
+        <h1>Green Keeper: Registro planta</h1>
+        <div class="row mb-3">
+          <div class="col-sm-6">
+            <label for="nombreComun" class="form-label">Nombre comun</label>
+            <input type="text" class="form-control" name="nombreComun" id="nombreComun" placeholder="Nombre planta"
+              required>
+          </div>
+          <div class="col-sm-6">
+            <label for="nombreCientifico" class="form-label">Nombre científico</label>
+            <input type="text" class="form-control" name="nombreCientifico" id="nombreCientifico"
+              placeholder="Nombre planta">
+          </div>
+        </div>
+        <hr>
+        <div class="row my-3 text-center">
+          <div class="col-sm-4 ">
+            <label for="familia" class="form-label">Familia</label>
+            <input type="text" class="form-control" name="familia" id="familia" placeholder="Familia">
+          </div>
+          <div class="col-sm-4 ">
+            <label for="genero" class="form-label">Genero</label>
+            <input type="text" class="form-control" name="genero" id="genero" placeholder="Genero">
+          </div>
+          <div class="col-sm-4 ">
+            <label for="especie" class="form-label">Especie</label>
+            <input type="text" class="form-control" name="especie" id="especie" placeholder="Especie">
+          </div>
+        </div>
+        <br>
+        <div class="row my-3 text-center">
+          <div class="col-sm-4 ">
+            <label for="variedad" class="form-label">Variedad</label>
+            <input type="text" class="form-control" name="variedad" id="variedad" placeholder="variedad">
+          </div>
+          <div class="col-sm-4 ">
+            <label for="tipo" class="form-label">Tipo</label>
+            <input type="text" class="form-control" name="tipo" id="tipo" placeholder="Tipo">
+          </div>
+          <div class="col-sm-4">
+            <label for="frecuenciaRiego">Frecuencia de Riego (días):</label>
+            <input type="number" id="frecuenciaRiego" name="frecuenciaRiego" min="1" max="7" required
+              value="frecuenciaRiego">
+          </div>
+
+        </div>
+        <div class="row">
+          <label for="descripcion">Descripción:</label>
+          <textarea id="descripcion" name="descripcion" required></textarea>
+        </div>
+
+        <hr>
+
+        <div class="mb-3">
+          <label for="imagen" class="form-label">Selecciona una imagen para cargar:</label>
+          <input class="form-control" type="file" name="imagen" id="imagen" accept="image/*">
+        </div>
+        <hr>
+
+        <div class="row">
+          <div class="col-sm-6 d-flex justify-content-start">
+            <a href="Perfil.html" class="btn btn-outline-warning">Cancelar</a>
+          </div>
+          <div class="col-sm-6 d-flex justify-content-end">
+            <button type="submit" class="btn btn-success">Registrar</button>
+          </div>
+        </div>
+
+      </form>
+    </div>
+  </div>
+
+</body>
+
+</html>

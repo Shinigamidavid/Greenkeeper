@@ -1,0 +1,87 @@
+.perfil{
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+    background: #08033a;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+.custom-width{
+    width: 1000px;
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+}
+.card{
+    position: relative;
+    cursor: pointer;
+}
+.box{
+    width: 300px;
+    height: 250px;
+    transition: .5s;
+}
+.card .box.box1{
+    position: relative;
+    background: #000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1;
+    transform: translateY(100px);
+}
+.card:hover .box1{
+    opacity: .5;
+    transform: translateY(0);
+}
+.content img{
+    width: 100%;
+}
+.content h5{
+    position: relative;
+    top: -24px;
+    padding: 8px;
+    color: #fff;
+    background: #000;
+    text-align: center;
+    font-size: 1em;
+}
+.card .box.box2{
+    position: relative;
+    background: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    box-sizing: border-box;
+    transform: translateY(-100px);
+}
+.card:hover .box2{
+    transform: translateY(0);
+    box-shadow: 0 2px 15px 2px #ffffff;
+}
+.content .icon{
+    color: #e7b309;
+    font-size: 20px;    
+}
+.content p{
+    margin: 10px 0 0 0;
+    padding: 0;
+}
+.content a{
+    margin: 15px 0 0;
+    display: inline-block;
+    text-decoration: none;
+    font-weight: 900;
+    color: #333;
+    padding: 10px;
+    border: 1px solid #000;
+    border-radius: 5px;
+}
+.content a:hover{
+    background: #280568;
+    color: #fff;
+    text-decoration: underline;
+}

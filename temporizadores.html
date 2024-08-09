@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Temporizadores</title>
+    <style>
+        .timer {
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Temporizadores</h1>
+    <div id="timers-container"></div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const timersContainer = document.getElementById('timers-container');
+
+            for (let i = 1; i <= 7; i++) {
+                createTimer(i);
+            }
+
+            function createTimer(days) {
+                const timerDiv = document.createElement('div');
+                timerDiv.className = 'timer';
+                timerDiv.innerHTML = `
+                    <p>Temporizador ${days}: <span id="timer-${days}">${days * 24} horas</span></p>
+                    <button onclick="capture(${days})">Captar</button>
+                    <button onclick="postpone(${days})">Posponer</button>
+                `;
+                timersContainer.appendChild(timerDiv);
+
+                let hoursRemaining = days * 24;
+
+                setInterval(() => {
+                    if (hoursRemaining > 0) {
+                        hoursRemaining--;
+                        document.getElementById(`timer-${days}`).innerText = `${hoursRemaining} horas`;
+                    }
+                }, 3600000); // Disminuye cada hora
+            }
+        });
+
+        function capture(days) {
+            alert(`Temporizador ${days} captado`);
+            // Aquí puedes agregar la lógica para capturar el temporizador
+        }
+
+        function postpone(days) {
+            alert(`Temporizador ${days} pospuesto`);
+            // Aquí puedes agregar la lógica para posponer el temporizador
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Inventario Plantas</title>
+
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Latest compiled JavaScript -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <link rel="stylesheet" href="css/estilosGreenkeeper.css">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.4.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    .card {
+      transition: transform 0.3s, box-shadow 0.3s;
+      cursor: pointer;
+      background: radial-gradient(circle at center, #ffffff, #f8f9fa, #e0e0e0);
+    }
+
+    .card:hover {
+      transform: scale(1.05);
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    }
+
+    .card-body {
+      transition: max-height 0.3s ease-out;
+      max-height: 0;
+      overflow: hidden;
+    }
+
+    .card:hover .card-body {
+      max-height: 500px;
+    }
+  </style>
+</head>
+
+<body>
+  </head>
+
+  <body>
+
+    <div class="container p-4 my-1 text-light" id="miContenedor">
+      <div class="row align-items-center">
+        <div class="col-sm-2 d-flex justify-content-center align-items-center">
+          <img src="img/HojaBegonia.jpeg" class="rounded-circle logo" alt="Logo">
+        </div>
+        <div class="col-sm-10">
+          <h1 class="display-1 text-center">GREENKEEPER</h1>
+        </div>
+      </div>
+    </div>
+    <nav class="navbar navbar-expand-md navbar-dark bg-success sticky-top">
+      <a class="navbar-brand" href="GreenkeeperIndex.html">Greenkeeper</a>
+      <form class="d-flex my-2 my-lg-0 ml-auto">
+        <input class="form-control me-2" type="search" id="nombreComun" name="nombreComun" placeholder="Buscar planta"
+          aria-label="Buscar">
+        <button class="btn btn-outline-primary my-2 my-sm-0" type="button" id="buscarBtn">Buscar</button>
+      </form>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item active">
+            <a class="nav-link" href="Registro_usuario.html">Registrarse</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Adquirir</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Recordatorios</a>
+          </li>
+          <li class="nav-item disabled">
+            <a class="nav-link" href="#">Contáctenos</a>
+          </li>
+
+        </ul>
+        <button class="btn btn-primary d-flex " onclick="history.back() ">Volver</button>
+      </div>
+    </nav>
+
+    <div class="btn btn-success position-fixed start-0 top-50 translate-middle-y m-3">
+      <a href="GreenkeeperIndex.html" class="text-white"><i class="bi bi-house"></i></a>
+    </div>
+
+    <div class="container mt-5">
+      <h1 class="text-center">Green Keeper: Tarjetas de Plantas</h1>
+      <div class="row" id="cards-container">
+        <!-- Aquí se insertarán las tarjetas generadas -->
+      </div>
+    </div>
+
+    <section id="galeria" class="container">
+      <div class="text-center pt-5">
+        <h1>Galería</h1>
+        <p>Información detallada sobre una amplia variedad de plantas, desde sus necesidades y caracteristicas.</p>
+      </div>
+      <div class="row">
+        <div class="col-lg-4 col-md-6 col-sm-12">
+          <img src="img/Items/PimulaRosaconAmarillo.jpeg" alt="Galeria imagen">
+        </div>
+        <div class="row" id="cards-container">
+          <!-- Aquí se insertarán las tarjetas generadas -->
+        </div>
+        <div class="col-lg-4 col-md-6 col-sm-12">
+          <img src="img/Items/PrimulaBlancaconRojoamarillo.jpeg" alt="Galeria imagen">
+        </div>
+        <div class="col-lg-4 col-md-6 col-sm-12">
+          <img src="img/Items/Prumulaazul.jpeg" alt="Galeria imagen">
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <hr>
+    <div class="container col-md-4 offset-sm-4">
+      <div class="card text-center">
+        <div class="card-header">
+          <ul class="nav nav-tabs card-header-tabs">
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="true" href="#">Active</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" aria-current="true" href="#">Active</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">Link</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
+            </li>
+          </ul>
+        </div>
+        <div class="card-body">
+          <div class="card-1" style="width: 18rem;">
+            <img src="img/ConoceyRegistra.webp" class="card-img-top" alt="tu_planta">
+            <div class="card-body">
+              <h5 class="card-title">Registra y Conoce tus plantas por ubicacion</h5>
+              <p class="card-text">Añade nuevas plantas a tu inventario para un seguimiento detallado y personalizado.
+              </p>
+            </div>
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item">id planta, nombre común , nombre científico,</li>
+              <li class="list-group-item">división ,orden ,familia, genero , especie , variedad ,</li>
+              <li class="list-group-item">fecha de plantación , estado </li>
+            </ul>
+            <div class="card-body">
+              <a href="#" class="card-link">Ver mis Ubicaciones</a>
+              <a href="Añadir_ubicacion.html" class="card-link">Añadir una ubicación</a>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <hr>
+
+      <br>
+
+      <hr>
+
+      <!-- Botón para abrir el modal -->
+      <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#exampleModal">
+        Agregar una planta
+      </button>
+
+      <!-- Modal -->
+      <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Formulario de Registro Planta</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <form>
+                <div class="row mb-3">
+                  <div class="col-sm-6">
+                    <label for="nombre" class="form-label">Nombre comun</label>
+                    <input type="text" class="form-control" id="nombre" placeholder="Nombre planta">
+                  </div>
+                  <div class="col-sm-6">
+                    <label for="nombre" class="form-label">Nombre científico</label>
+                    <input type="text" class="form-control" id="nombre_cientifico" placeholder="Nombre planta">
+                  </div>
+                </div>
+                <br>
+
+                <div class="row my-3 text-center">
+                  <div class="col-sm-4 ">
+                    <div class="btn-group" role="group">
+                      <button id="btnGroupDrop1" type="button" class="btn btn-success dropdown-toggle"
+                        data-bs-toggle="dropdown" aria-expanded="false">Division</button>
+                      <ul class="dropdown-menu" aria-labelledby="btnGroupDrop1">
+                        <li><a class="dropdown-item" href="#">Opcion a-b</a></li>
+                        <li><a class="dropdown-item" href="#">Opcion a-b</a></li>
+                      </ul>
+                    </div>
+                  </div>
+
+                  <div class="col-sm-4 ">
+                    <div class="btn-group" role="group">
+                      <button id="btnGroupDrop1" type="button" class="btn btn-success dropdown-toggle"
+                        data-bs-toggle="dropdown" aria-expanded="false">Orden</button>
+                      <ul class="dropdown-menu" aria-labelledby="btnGroupDrop1">
+                        <li><a class="dropdown-item" href="#">Opcion a-b</a></li>
+                        <li><a class="dropdown-item" href="#">Opcion a-b</a></li>
+                      </ul>
+                    </div>
+                  </div>
+
+                  <div class="col-sm-4 ">
+                    <div class="btn-group" role="group">
+                      <button id="btnGroupDrop1" type="button" class="btn btn-success dropdown-toggle"
+                        data-bs-toggle="dropdown" aria-expanded="false">familia</button>
+                      <ul class="dropdown-menu" aria-labelledby="btnGroupDrop1">
+                        <li><a class="dropdown-item" href="#">Opcion a-b</a></li>
+                        <li><a class="dropdown-item" href="#">Opcion a-b</a></li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+                <br>
+                <div class="row my-3 text-center">
+                  <div class="col-sm-4 ">
+                    <div class="btn-group" role="group">
+                      <button id="btnGroupDrop1" type="button" class="btn btn-success dropdown-toggle"
+                        data-bs-toggle="dropdown" aria-expanded="false">Genero</button>
+                      <ul class="dropdown-menu" aria-labelledby="btnGroupDrop1">
+                        <li><a class="dropdown-item" href="#">Dropdown link</a></li>
+                        <li><a class="dropdown-item" href="#">Dropdown link</a></li>
+                      </ul>
+                    </div>
+                  </div>
+
+                  <div class="col-sm-4 ">
+                    <div class="btn-group" role="group">
+                      <button id="btnGroupDrop1" type="button" class="btn btn-success dropdown-toggle"
+                        data-bs-toggle="dropdown" aria-expanded="false">Especie</button>
+                      <ul class="dropdown-menu" aria-labelledby="btnGroupDrop1">
+                        <li><a class="dropdown-item" href="#">Dropdown link</a></li>
+                        <li><a class="dropdown-item" href="#">Dropdown link</a></li>
+                      </ul>
+                    </div>
+                  </div>
+
+                  <div class="col-sm-4 ">
+                    <div class="btn-group" role="group">
+                      <button id="btnGroupDrop1" type="button" class="btn btn-success dropdown-toggle"
+                        data-bs-toggle="dropdown" aria-expanded="false">variedad</button>
+                      <ul class="dropdown-menu" aria-labelledby="btnGroupDrop1">
+                        <li><a class="dropdown-item" href="#">Dropdown link</a></li>
+                        <li><a class="dropdown-item" href="#">Dropdown link</a></li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+
+                <hr>
+            </div>
+            <div class="mb-3">
+              <label for="plantacion">Fecha de plantacion</label>
+              <input type="date" id="plantacion" name="plantacion">
+            </div>
+            <hr>
+            <div class="mb-3">
+              <div class="div">
+                <label for="estado">Estado de la planta</label>
+              </div>
+              <div class="form-check form-switch">
+                <label class="form-check-label" for="activa">Activa</label>
+                <input class="form-check-input" name="estado" type="radio" id="activa" checked>
+
+              </div>
+              <div class="form-check form-switch">
+                <label class="form-check-label" for="inactiva">Inactiva</label>
+                <input class="form-check-input" name="estado" type="radio" id="inactiva">
+
+              </div>
+            </div>
+
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-outline-warning" data-bs-dismiss="modal">Cerrar</button>
+            <button type="button" class="btn btn-success">Cargar</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    </div>
+    <hr>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        fetch('plantatarjeta.php')
+          .then(response => response.text())
+          .then(data => {
+            document.getElementById('cards-container').innerHTML = data;
+          });
+      });
+    </script>
+
+
+
+  </body>
+
+</html>

@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Green Keeper: Registro Planta</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .card {
+            transition: transform 0.3s, box-shadow 0.3s;
+            cursor: pointer;
+            background: radial-gradient(circle at center, #ffffff, #f8f9fa, #e0e0e0);
+        }
+        .card:hover {
+            transform: scale(1.05);
+            box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+        }
+        .card-body {
+            transition: max-height 0.3s ease-out;
+            max-height: 0;
+            overflow: hidden;
+        }
+        .card:hover .card-body {
+            max-height: 500px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container mt-5">
+        <h1 class="text-center">Green Keeper: Registro Planta</h1>
+        <form action="plantaregistro.php" method="post" enctype="multipart/form-data">
+            <div class="row mb-3">
+                <div class="col-sm-6">
+                    <label for="nombreComun" class="form-label">Nombre común</label>
+                    <input type="text" class="form-control" name="nombreComun" id="nombreComun" placeholder="Nombre planta" required>
+                </div>
+                <div class="col-sm-6">
+                    <label for="nombreCientifico" class="form-label">Nombre científico</label>
+                    <input type="text" class="form-control" name="nombreCientifico" id="nombreCientifico" placeholder="Nombre planta">
+                </div>
+            </div>
+            <hr>
+            <div class="row my-3 text-center">
+                <div class="col-sm-4">
+                    <label for="familia" class="form-label">Familia</label>
+                    <input type="text" class="form-control" name="familia" id="familia" placeholder="Familia">
+                </div>
+                <div class="col-sm-4">
+                    <label for="genero" class="form-label">Género</label>
+                    <input type="text" class="form-control" name="genero" id="genero" placeholder="Género">
+                </div>
+                <div class="col-sm-4">
+                    <label for="especie" class="form-label">Especie</label>
+                    <input type="text" class="form-control" name="especie" id="especie" placeholder="Especie">
+                </div>
+            </div>
+            <br>
+            <div class="row my-3 text-center">
+                <div class="col-sm-4">
+                    <label for="tipo" class="form-label">Tipo</label>
+                    <input type="text" class="form-control" name="tipo" id="tipo" placeholder="Tipo">
+                </div>
+
+                <div class="col-sm-4">
+                    <label for="variedad" class="form-label">Variedad</label>
+                    <input type="text" class="form-control" name="variedad" id="variedad" placeholder="Variedad">
+                </div>
+                <div class="col-sm-4">
+                    <label for="frecuencia" class="form-label">Frecuencia de riego</label>
+                    <input type="text" class="form-control" name="frecuencia" id="frecuencia" placeholder="Frecuencia de riego" required>
+                </div>
+            </div>
+            <div class="row">
+                <label for="descripcion">Descripción:</label>
+                <textarea id="descripcion" class="form-control" name="descripcion" rows="3" required></textarea>
+            </div>
+            <hr>
+            <div class="mb-3">
+                <label for="imagen" class="form-label">Selecciona una imagen para cargar:</label>
+                <input class="form-control" type="file" name="imagen" id="imagen" accept="image/*" required>
+            </div>
+            <hr>
+            <div class="row">
+                <div class="col-sm-6 d-flex justify-content-start">
+                    <a href="Perfil.html" class="btn btn-outline-warning">Cancelar</a>
+                </div>
+                <div class="col-sm-6 d-flex justify-content-end">
+                    <button type="submit" class="btn btn-success">Registrar</button>
+                </div>
+            </div>
+        </form>
+
+        <h2 class="text-center mt-5">Tarjetas Generadas</h2>
+        <div class="row" id="cards-container">
+            <!-- Aquí se insertarán las tarjetas generadas -->
+        </div>
+    </div>
+
+    <!-- Bootstrap JS and dependencies -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            fetch('plantatarjeta.php')
+                .then(response => response.text())
+                .then(data => {
+                    document.getElementById('cards-container').innerHTML = data;
+                });
+        });
+    </script>
+</body>
+</html>
