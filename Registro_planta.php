@@ -26,9 +26,11 @@
 
 
     if (
-        isset($_POST["nombreComun"]) && isset($_POST["nombreCientifico"]) && isset($_POST["familia"])
-        && isset($_POST["genero"]) && isset($_POST["especie"]) && isset($_POST["variedad"]) && isset($_POST["tipo"])
-        && isset($_POST["descripcion"]) && isset($_FILES["imagen"])
+        isset($_POST["nombreComun"]) && isset($_POST["nombreCientifico"]) 
+        && isset($_POST["familia"]) && isset($_POST["genero"]) && 
+        isset($_POST["especie"]) && isset($_POST["variedad"]) && 
+        isset($_POST["tipo"])  && isset($_POST["frecuenciaRiego"])&& 
+        isset($_POST["descripcion"]) && isset($_FILES["imagen"])
     ) {
 
 
@@ -39,6 +41,7 @@
         $especie = $_POST["especie"];
         $variedad = $_POST["variedad"];
         $tipo = $_POST["tipo"];
+        $frecuencia = $_POST["frecuenciaRiego"];
         $descripcion = $_POST["descripcion"];
 
         $directorio = "archivos/";
@@ -55,9 +58,9 @@
                 if ($conexion) {
 
                     $sql = "INSERT INTO planta (nombreComun, nombreCientifico, familia, genero, especie,
-                    variedad, tipo, descripcion, imagen)
+                    variedad, tipo, frecuenciaRiego, descripcion, imagen)
                     VALUES ('$nombreComun','$nombreCientifico','$familia','$genero','$especie',
-                    '$variedad','$tipo','$descripcion','$imagen')";
+                    '$variedad','$tipo','$frecuencia','$descripcion','$imagen')";
 
                     $resultado = $conexion->query($sql);
 

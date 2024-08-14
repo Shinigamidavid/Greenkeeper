@@ -160,10 +160,10 @@ input {
     position: absolute;
     bottom: 20%;
     left: 50%;
-    transform: translate(-50%, -50%);
+    transform: translate(-6%, -50%);
     /*background-color: rgba(99, 216, 210, 0.5); /* Fondo semi-transparente para mejor visibilidad del texto */
     backdrop-filter: blur(20px);
-    padding: 5px;
+    padding: 10px;
     width: 80%;
     border-radius: 10px;
 }

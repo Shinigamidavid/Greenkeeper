@@ -20,7 +20,7 @@
 <body>
 	<header>
 		<h1>Cliente</h1>
-		<p class="text-success p-4"><?php echo $_SESSION['nombre'], $_SESSION['apellido'];?></p>
+		<p class="text-success p-4 me-2"><?php echo $_SESSION['nombre'], $_SESSION['apellido'];?></p>
 	</header>
 	<nav>Barra de Menu</nav>
 	<section>

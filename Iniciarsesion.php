@@ -41,9 +41,9 @@
         <li class="nav-item">
           <a class="nav-link" href="#">Adquirir</a>
         </li>
-        <li class="nav-item">
+        <!-- <li class="nav-item">
           <a class="nav-link" href="#">Link</a>
-        </li>
+        </li> -->
         <li class="nav-item">
           <a class="nav-link disabled" href="#">Contactenos</a>
         </li>

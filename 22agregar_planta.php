@@ -1,15 +1,15 @@
 <?php
 $servername = "localhost";
-$username = "username";
-$password = "password";
-$dbname = "database";
+$username = "root";
+$password = "";
+$dbname = "greenkeeper1";
 
 // Crear conexión
-$conn = new mysqli($servername, $username, $password, $dbname);
+$conexion = new mysqli($servername, $username, $password, $dbname);
 
 // Verificar conexión
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
+if ($conexion->connect_error) {
+    die("Connection failed: " . $conexion->connect_error);
 }
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -19,7 +19,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     // Obtener datos de la planta
     $sql = "SELECT id, frecuenciaRiego FROM planta WHERE nombreComun = ?";
-    $stmt = $conn->prepare($sql);
+    $stmt = $conexion->prepare($sql);
     $stmt->bind_param("s", $nombrePlanta);
     $stmt->execute();
     $result = $stmt->get_result();
@@ -30,7 +30,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         // Insertar en plantaUsuario
         $sql = "INSERT INTO plantaUsuario (idPlanta, idUsuario, frecuenciaRiego) VALUES (?, ?, ?)";
-        $stmt = $conn->prepare($sql);
+        $stmt = $conexion->prepare($sql);
         $stmt->bind_param("iii", $idPlanta, $idUsuario, $frecuenciaRiego);
         $stmt->execute();
         $idPlantaUsuario = $stmt->insert_id;
@@ -39,7 +39,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $estado = 'encendida';
         $fechaInicio = date('Y-m-d H:i:s');
         $sql = "INSERT INTO recordatorio (idPlantaUsuario, estado, frecuencia, fechaInicio) VALUES (?, ?, ?, ?)";
-        $stmt = $conn->prepare($sql);
+        $stmt = $conexion->prepare($sql);
         $stmt->bind_param("isis", $idPlantaUsuario, $estado, $frecuenciaRiego, $fechaInicio);
         $stmt->execute();
 
@@ -49,5 +49,5 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 }
 
-$conn->close();
+$conexion->close();
 ?>
