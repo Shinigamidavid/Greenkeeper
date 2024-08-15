@@ -55,3 +55,121 @@
     </script>
 </body>
 </html>
+
+//
+<hr>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Temporizadores</title>
+    <style>
+        .timer {
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Temporizadores</h1>
+    <div id="timers-container"></div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const timersContainer = document.getElementById('timers-container');
+
+            for (let i = 1; i <= 7; i++) {
+                createTimer(i);
+            }
+
+            function createTimer(days) {
+                const timerDiv = document.createElement('div');
+                timerDiv.className = 'timer';
+                timerDiv.innerHTML = `
+                    <p>Temporizador ${days}: <span id="timer-${days}">${days * 24} horas</span></p>
+                    <button onclick="capture(${days})">Captar</button>
+                    <button onclick="postpone(${days})">Posponer</button>
+                `;
+                timersContainer.appendChild(timerDiv);
+
+                let hoursRemaining = days * 24;
+
+                setInterval(() => {
+                    if (hoursRemaining > 0) {
+                        hoursRemaining--;
+                        document.getElementById(`timer-${days}`).innerText = `${hoursRemaining} horas`;
+                    }
+                }, 3600000); // Disminuye cada hora
+            }
+        });
+
+        function capture(days) {
+            alert(`Temporizador ${days} captado`);
+            sendTimerData(days, 'captar');
+        }
+
+        function postpone(days) {
+            alert(`Temporizador ${days} pospuesto`);
+            sendTimerData(days, 'posponer');
+        }
+
+        function sendTimerData(days, action) {
+            const xhr = new XMLHttpRequest();
+            xhr.open("POST", "handle_timer.php", true);
+            xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+            xhr.onreadystatechange = function() {
+                if (xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
+                    console.log(xhr.responseText);
+                }
+            };
+            xhr.send(`days=${days}&action=${action}&idRecordatorio=1`); // Reemplaza con el ID real del recordatorio
+        }
+    </script>
+</body>
+</html>
+
+// handler.php
+
+<?php
+// Configuración de la base de datos
+$servername = "localhost";
+$username = "usuario";
+$password = "contraseña";
+$dbname = "nombre_base_datos";
+
+// Crear conexión
+$conn = new mysqli($servername, $username, $password, $dbname);
+
+// Verificar conexión
+if ($conn->connect_error) {
+    die("Conexión fallida: " . $conn->connect_error);
+}
+
+// Obtener datos del POST
+$days = $_POST['days'];
+$action = $_POST['action'];
+$idRecordatorio = $_POST['idRecordatorio'];
+
+// Calcular la próxima fecha de ejecución del temporizador
+$next_execution = new DateTime();
+$next_execution->modify("+$days days");
+
+// Acciones basadas en 'captar' o 'posponer'
+if ($action === 'captar') {
+    // Registrar o actualizar el temporizador en la base de datos
+    $sql = "UPDATE recordatorio SET proximaEjecucion='" . $next_execution->format('Y-m-d H:i:s') . "' WHERE idRecordatorio=$idRecordatorio";
+} elseif ($action === 'posponer') {
+    // Posponer el temporizador (por ejemplo, añadir un día más)
+    $next_execution->modify("+1 day");
+    $sql = "UPDATE recordatorio SET proximaEjecucion='" . $next_execution->format('Y-m-d H:i:s') . "' WHERE idRecordatorio=$idRecordatorio";
+}
+
+if ($conn->query($sql) === TRUE) {
+    echo "Temporizador actualizado correctamente.";
+} else {
+    echo "Error al actualizar el temporizador: " . $conn->error;
+}
+
+$conn->close();
+?>
