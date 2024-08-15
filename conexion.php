@@ -13,7 +13,8 @@
         die("fallo en la conexion" .$conexion ->connect_error);
     }
     else{
-        //echo "conexion exitosa";
+        echo "conexion exitosa";
 
     }
 ?>
+

@@ -1,4 +1,12 @@
 <?php
+session_start();
+
+// Verifica si ya hay una sesión activa
+if (isset($_SESSION['correo'])) {
+    // Redirige al perfil si el usuario ya está conectado
+    header("Location: perfil.php");
+    exit();
+}
 include 'conexion.php'; // Tu archivo de conexión a la base de datos
 
 // Obtener datos del formulario
