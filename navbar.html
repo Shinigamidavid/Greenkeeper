@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Greenkeeper - Búsqueda de Plantas</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <style>
+        .card {
+            transition: transform 0.3s, box-shadow 0.3s;
+            cursor: pointer;
+            background: radial-gradient(circle at center, #ffffff, #f8f9fa, #e0e0e0);
+        }
+        .card:hover {
+            transform: scale(1.05);
+            box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+        }
+        .card-body {
+            transition: max-height 0.3s ease-out;
+            max-height: 0;
+            overflow: hidden;
+        }
+        .card:hover .card-body {
+            max-height: 500px;
+        }
+    </style>
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="#">Greenkeeper</a>
+    <form class="form-inline ml-auto">
+        <input class="form-control mr-sm-2" type="search" id="nombreComun" placeholder="Buscar planta" aria-label="Buscar">
+        <button class="btn btn-outline-success my-2 my-sm-0" type="button" id="buscarBtn">Buscar</button>
+    </form>
+</nav>
+
+<div class="container mt-5">
+    <!-- Aquí se mostrará el modal con los resultados -->
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="plantaModal" tabindex="-1" role="dialog" aria-labelledby="plantaModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="plantaModalLabel">Detalles de la Planta</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body" id="resultadoBusqueda">
+                <!-- Resultados de la búsqueda se mostrarán aquí -->
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(document).ready(function() {
+        // Autocompletado
+        $('#nombreComun').autocomplete({
+            source: function(request, response) {
+                $.ajax({
+                    url: 'search.php',
+                    method: 'GET',
+                    data: { term: request.term },
+                    success: function(data) {
+                        response($.parseJSON(data));
+                    },
+                    error: function(xhr, status, error) {
+                        console.error(xhr);
+                    }
+                });
+            }
+        });
+    
+        // Buscar y mostrar modal
+        $('#buscarBtn').click(function() {
+            var nombreComun = $('#nombreComun').val();
+            if (nombreComun) {
+                $.ajax({
+                    url: 'getPlanta.php',
+                    method: 'GET',
+                    data: { nombreComun: nombreComun },
+                    success: function(data) {
+                        $('#resultadoBusqueda').html(data);
+                        $('#plantaModal').modal('show');
+                    },
+                    error: function(xhr, status, error) {
+                        console.error(xhr);
+                    }
+                });
+            }
+        });
+    });
+    </script>
+    
+
+</body>
+</html>
