@@ -1,6 +1,6 @@
 <?php
 session_start();
-if (isset($_SESSION['nombre']) && isset($_SESSION['apellido']));
+if (isset($_SESSION['nombre']) && isset($_SESSION['apellido']) && isset($_SESSION['idUsuario']) );
 ?>
 
 <!DOCTYPE html>
@@ -35,7 +35,7 @@ if (isset($_SESSION['nombre']) && isset($_SESSION['apellido']));
       </div>
       <div class="col-sm-2">
         <h1>Usuario</h1>
-        <p class="text-warning p-4"><?php echo $_SESSION['nombre'], $_SESSION['apellido']; ?></p>
+        <p class="text-warning p-4"><?php echo $_SESSION['idUsuario'] . " " .$_SESSION['nombre'] . " " . $_SESSION['apellido']; ?></p>
 
       </div>
     </div>
@@ -52,7 +52,7 @@ if (isset($_SESSION['nombre']) && isset($_SESSION['apellido']));
           <a class="nav-link active" href="Añadir_planta.html">Agregar Planta</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="Añadir_ubicacion.html">Agregar Ubicacion</a>
+          <a class="nav-link" href="Añadir-ubicacion.php">Agregar Ubicacion</a>
         </li>
         <li class="nav-item">
           <a class="nav-link " href="Añadir_recordatorio.html">Agregar Recordatorio</a>

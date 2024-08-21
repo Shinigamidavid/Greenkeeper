@@ -28,7 +28,7 @@ if(isset($_POST["nombre"]) && isset($_POST["apellido"]) && isset($_POST["nacimie
     $identificacion = $_POST["identificacion"];
     $noCelular = $_POST["cel"];
     $correo = $_POST["correo"];
-    $idRol = $_POST["idRol"];
+    // $idRol = $_POST["idRol"];
     $password = $_POST["password"];
     
     // Validar que las contraseñas coincidan
@@ -40,7 +40,7 @@ if(isset($_POST["nombre"]) && isset($_POST["apellido"]) && isset($_POST["nacimie
         $sql = "INSERT INTO usuario (identificacion, nombre, apellido, fechaNacimiento,
                 correo, sexo, noCelular, idRol, password)
                 VALUES ('$identificacion','$nombre','$apellido','$fechaNacimiento',
-                '$correo','$sexo','$noCelular','$idRol','$password')";
+                '$correo','$sexo','$noCelular',2,'$password')";
         $resultado = $conexion->query($sql);
         
         if($resultado) {

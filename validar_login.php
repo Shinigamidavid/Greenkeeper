@@ -34,7 +34,7 @@
                 $_SESSION['nombre'] = $row ['nombre'];
                 $_SESSION['idRol'] = $row ['idRol'];
                 if($row['idRol'] == 2 ){
-                    header('location: InterfazCliente.php');
+                    header('location: Perfil.php');
                 }elseif($row['idRol'] == 1 ){
                     header('location: InterfazAdmin.php');
                 }
@@ -56,4 +56,8 @@
 }
 
 ?>
+
+<script>
+    history.replaceState(null, null, location.pathname);
+    </script>
 

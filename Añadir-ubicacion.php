@@ -1,12 +1,9 @@
 <?php
 session_start();
+if (isset($_SESSION['nombre']) && isset($_SESSION['apellido']));
 
-if (isset($_SESSION['correo'])) {
-    $mensaje = "Ya estás autenticado. Puedes realizar otras acciones en esta página.";
-} else {
-    $fecha_actual = date('Y-m-d');
-}
 
+$fecha_actual = date('Y-m-d');
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -34,23 +31,24 @@ if (isset($_SESSION['correo'])) {
 
     <div class="row my-3 ">
         <div class="col-sm-6 offset-sm-3 text-center" id="formuubicacion">
+            <form action="Añadir_ubicacion.php" method="post" enctype="multipart/form-data">
+                <h1 class="text-warning">Green Keeper: Añadir Ubicacion</h1>
+                <p class="text-warning p-4"><?php echo $_SESSION['idUsuario'] . " " . $_SESSION['nombre'] . " " . $_SESSION['apellido']; ?></p>
 
-            <form action="Añadir_ubicacion.php" tarjet="" method="POST" enctype="multipart/form-data">
-                <h1>Green Keeper: Añadir Ubicacion</h1>
                 <div class="row mb-3">
                     <div class="col-md-6">
                         <label for="nombre" class="form-label">Nombre Ubicación</label>
                         <input type="text" class="form-control" name="nombre" id="nombre" placeholder="Nombre Ubicacion" required>
                     </div>
                     <div class="col-md-6 ">
-                        <label for="fechaModificacion">Fecha de Modificación:</label>
-                        <input type="date" id="fechaModificacion" name="fechafechaModificacion" value="<?php echo htmlspecialchars($fecha_actual); ?>">
+                        <label class="form-label" for="fechaModificacion">Fecha de Modificación:</label>
+                        <input class="form-control" type="date" id="fechaModificacion" name="fechaModificacion" value="<?php echo htmlspecialchars($fecha_actual); ?>">
                     </div>
                 </div>
                 <hr>
                 <div class="row my-3 text-center">
-                    <div class="col-sm-4 ">
-                        <!-- <div class="btn-group" role="group">
+                    <!-- <div class="col-sm-4 ">
+                        <div class="btn-group" role="group">
                             <button id="btnGroupDrop1" type="button" class="btn btn-success dropdown-toggle"
                                 data-bs-toggle="dropdown" aria-expanded="false">Dirección de la luz</button>
                             <ul class="dropdown-menu" aria-labelledby="btnGroupDrop1">
@@ -59,10 +57,10 @@ if (isset($_SESSION['correo'])) {
                                 <li><a class="dropdown-item" href="#">Oriente</a></li>
                                 <li><a class="dropdown-item" href="#">Occidente</a></li>
                             </ul>
-                        </div> -->
-                    </div>
-                    <div class="col-sm-4 ">
-                        <div class="btn-group" role="group">
+                        </div>
+                    </div> -->
+                    <div class="">
+                        <!-- <div class="btn-group" role="group">
                             <button id="btnGroupDrop1" type="button" class="btn btn-success dropdown-toggle"
                                 data-bs-toggle="dropdown" aria-expanded="false">Tipo de Entorno</button>
                             <ul class="dropdown-menu" aria-labelledby="btnGroupDrop1">
@@ -70,30 +68,30 @@ if (isset($_SESSION['correo'])) {
                                 <li><a class="dropdown-item" data-value="exterior" onclick="setDropdownValue(this)">Exterior</a></li>
                             </ul>
                         </div>
-                        <input type="hidden" id="tipoEntorno" name="tipoEntorno">
-                        <div class="div-col-sm-4">
+                        <input type="hidden" id="tipo" nametipo" required> -->
+                        <!-- <div class="div-col-sm-4">="
                             <div class="">
                                 <label for="idUbicacion" class="form-label">No. Ubicación</label>
                                 <input type="text" class="form-control" id="idUbicacion" name="idUbicacion" placeholder="Número de Ubicación" required>
                             </div>
-                        </div>
+                        </div> -->
 
-                        <!-- <div class="mb-3">
-                            <label for="tipoEntorno" class="form-label">Tipo de Entorno:</label>
-                            <select id="tipoEntorno" name="tipoEntorno" class="form-select" required>
+                        <div class="mb-3">
+                            <label for="tipo" class="form-label">Tipo de Entorno:</label>
+                            <select id="tipo" name="tipo" class="form-select" required>
                                 <option value="" disabled selected>Selecciona un tipo de entorno</option>
                                 <option value="interior">Interior</option>
                                 <option value="exterior">Exterior</option>
                             </select>
-                        </div> -->
+                        </div>
 
                     </div>
                 </div>
                 <hr>
 
                 <div class="mb-3">
-                    <label for="foto_ubicacion" class="form-label">Selecciona una imagen para Ubicacion:</label>
-                    <input class="form-control" type="file" id="foto_ubicacion" accept="image/*">
+                    <label for="imagen" class="form-label">Selecciona una imagen para Ubicacion:</label>
+                    <input class="form-control" type="file" name="imagen" id="imagen" accept="image/*">
                 </div>
                 <hr>
 
@@ -102,7 +100,8 @@ if (isset($_SESSION['correo'])) {
                         <a href="Perfil.html" class="btn btn-outline-warning">Cancelar</a>
                     </div>
                     <div class="col-sm-6 d-flex justify-content-end">
-                        <a href="" type="submit" class="btn btn-success">Añadir Ubicación</a>
+                        <button type="submit" class="btn btn-success">Añadir Ubicación</button>
+
                     </div>
                 </div>
 
@@ -114,11 +113,12 @@ if (isset($_SESSION['correo'])) {
             // Obtén el valor del atributo data-value del elemento clickeado
             var value = element.getAttribute('data-value');
             // Asigna el valor al campo oculto
-            document.getElementById('tipoEntorno').value = value;
+            document.getElementById('tipo').value = value;
             // Cambia el texto del botón para mostrar la opción seleccionada
             document.getElementById('btnGroupDrop1').innerText = element.innerText;
         }
     </script>
+
 
 </body>
 

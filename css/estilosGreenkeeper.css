@@ -83,7 +83,8 @@ body{
         font-size: 16px;
       }
       .input-wrapper input[type="password"] {
-        padding-right: 2.5rem; /* Espacio para el icono */
+        padding-right: 2.5rem; 
+        /* Espacio para el icono */
       }
       .input-wrapper .bi {
         position: absolute;
