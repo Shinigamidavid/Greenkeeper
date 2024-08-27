@@ -1,8 +1,8 @@
 .perfil{
     margin: 0;
     padding: 0;
-    min-height: 100vh;
-    background: #08033a;
+    min-height: 70vh;
+    /* background: #08033a; */
     display: flex;
     justify-content: center;
     align-items: center;
@@ -14,16 +14,37 @@
     display: flex;
     justify-content: space-between;
 }
-.card{
-    position: relative;
+.card {
+    position: relative; /* Contenedor relativo para posicionar los hijos absolutamente */
+    width: 300px; /* Ancho fijo para la tarjeta */
+    height: 250px; /* Altura fija para la tarjeta */
     cursor: pointer;
 }
-.box{
+/* .card{
+    position: relative;
+    cursor: pointer;
+} */
+.box {
+    position: absolute; /* Posición absoluta para superponer */
+   
+    width: 100%;
+    height: 100%;
+    transition: .5s ease-in-out;
+}
+/* .box{
     width: 300px;
     height: 250px;
     transition: .5s;
+} */
+.card .box.box1 {
+    background: #000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 2; /* Colocar box1 por encima inicialmente */
+    transform: translateY(0); /* Inicialmente en la misma posición */
 }
-.card .box.box1{
+/* .card .box.box1{
     position: relative;
     background: #000;
     display: flex;
@@ -31,10 +52,11 @@
     align-items: center;
     z-index: 1;
     transform: translateY(100px);
-}
+} */
 .card:hover .box1{
     opacity: .5;
-    transform: translateY(0);
+    transform: translateY(-50%);
+    /* transform: translateY(0); */
 }
 .content img{
     width: 100%;
@@ -48,7 +70,17 @@
     text-align: center;
     font-size: 1em;
 }
-.card .box.box2{
+.card .box.box2 {
+    background: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    box-sizing: border-box;
+    z-index: 1; /* Colocar box2 debajo */
+    transform: translateY(0); /* Inicialmente en la misma posición */
+}
+/* .card .box.box2{
     position: relative;
     background: #fff;
     display: flex;
@@ -57,9 +89,10 @@
     padding: 20px;
     box-sizing: border-box;
     transform: translateY(-100px);
-}
+} */
 .card:hover .box2{
-    transform: translateY(0);
+    transform: translateY(50%);
+    /* transform: translateY(0); */
     box-shadow: 0 2px 15px 2px #ffffff;
 }
 .content .icon{

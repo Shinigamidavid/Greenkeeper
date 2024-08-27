@@ -1,41 +1,35 @@
 <?php
-include 'conexion.php'; // Tu archivo de conexión a la base de datos
+include 'conexion.php';
+session_start();
 
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    // Recibir datos del formulario
-    $nombreComun = $_POST['nombre_comun'];
-    $fechaPlantacion = $_POST['fecha_plantacion'];
-    $estado = $_POST['estado'];
-    $idUbicacion = $_POST['id_ubicacion'];
-    $frecuenciaRiego = $_POST['frecuencia_riego'];
-    $idUsuario = $_SESSION['idUsuario']; // Suponiendo que tienes una sesión iniciada
+// Obtener el correo del usuario logueado
+$correo = $_SESSION['correo'];
 
-    // Buscar idPlanta en la tabla planta
-    $sql = "SELECT idPlanta FROM planta WHERE nombreComun = ?";
-    $stmt = $conexion->prepare($sql);
-    $stmt->bind_param("s", $nombreComun);
-    $stmt->execute();
-    $result = $stmt->get_result();
-    $planta = $result->fetch_assoc();
+// Obtener los datos del formulario
+$idPlanta = intval($_POST['idPlanta']);  // Asegúrate de incluir este campo oculto en el formulario
+$estado = $_POST['estado'];
+$fechaPlantacion = $_POST['fechaPlantacion'];
+$frecuenciaRiego = $_POST['frecuenciaRiego'];
+$fechaCreacion = $_POST['fechaCreacion'];
 
-    if ($planta) {
-        $idPlanta = $planta['idPlanta'];
+// Obtener el ID del usuario a partir del correo
+$consultaUsuario = $conexion->prepare("SELECT idUsuario FROM usuario WHERE correo = ?");
+$consultaUsuario->bind_param('s', $correo);
+$consultaUsuario->execute();
+$resultadoUsuario = $consultaUsuario->get_result();
+$rowUsuario = $resultadoUsuario->fetch_assoc();
+$idUsuario = $rowUsuario['idUsuario'];
 
-        // Insertar en plantaUsuario
-        $fechaCreacion = date('Y-m-d');
-        $sqlInsert = "INSERT INTO plantaUsuario (idPlanta, idUsuario, fechaPlantacion, estado, idUbicacion, idRecordatorio, fechaCreacion) 
-                      VALUES (?, ?, ?, ?, ?, ?, ?)";
-        $stmtInsert = $conexion->prepare($sqlInsert);
-        $idRecordatorio = null; // Aquí podrías asignar el idRecordatorio después
-        $stmtInsert->bind_param("iisssis", $idPlanta, $idUsuario, $fechaPlantacion, $estado, $idUbicacion, $idRecordatorio, $fechaCreacion);
-        if ($stmtInsert->execute()) {
-            echo "Planta registrada con éxito";
-            // Redirigir o realizar alguna acción
-        } else {
-            echo "Error al registrar la planta";
-        }
-    } else {
-        echo "No se encontró la planta con ese nombre común";
-    }
+// Insertar los datos en la tabla plantaUsuario
+$consultaInsertar = $conexion->prepare("INSERT INTO plantausuario (idUsuario, idPlanta, estado, fechaPlantacion, frecuencia, fechaCreacion) VALUES (?, ?, ?, ?, ?, ?)");
+$consultaInsertar->bind_param('iissss', $idUsuario, $idPlanta, $estado, $fechaPlantacion, $frecuenciaRiego, $fechaCreacion);
+
+if ($consultaInsertar->execute()) {
+    echo "Planta registrada con éxito";
+} else {
+    echo "Error al registrar la planta: " . $conexion->error;
 }
+
+$consultaInsertar->close();
+$conexion->close();
 ?>

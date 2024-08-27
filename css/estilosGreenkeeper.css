@@ -194,6 +194,29 @@ input {
 
 }
 
+#ubicacion {
+    width: 300px; /* Establece un ancho fijo para todas las tarjetas */
+    height: 400px; /* Establece una altura fija para todas las tarjetas */
+    position: relative;
+    cursor: pointer;
+    overflow: hidden; /* Asegura que el contenido no se desborde fuera de la tarjeta */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid #ddd; /* Opcional, para dar un borde a las tarjetas */
+    padding: 10px;
+}
+#ubicacion img {
+    max-width: 100%; /* Asegura que la imagen no sea más ancha que la tarjeta */
+    max-height: 65%; /* Limita la altura de la imagen para dejar espacio para el texto */
+    object-fit: contain; /* Mantiene las proporciones de la imagen */
+}
+#ubicacion .card-body {
+    margin-top: 10px; /* Espacio entre la imagen y el contenido textual */
+    text-align: center; /* Centra el texto dentro de la tarjeta */
+}
+
 
 /* .go-top-container {
     position: fixed;

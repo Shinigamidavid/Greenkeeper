@@ -1,6 +1,14 @@
 <?php
 session_start();
-if (isset($_SESSION['nombre']) && isset($_SESSION['apellido']) && isset($_SESSION['idUsuario']) );
+if (isset($_SESSION['correo']) ) {
+    // El usuario ha iniciado sesión correctamente
+} else {
+   
+    header("location:Iniciarsesion.php?error=Debe Iniciar Sesión");
+    exit(); 
+}
+
+$fecha_actual = date('Y-m-d');
 ?>
 
 <!DOCTYPE html>
@@ -46,10 +54,14 @@ if (isset($_SESSION['nombre']) && isset($_SESSION['apellido']) && isset($_SESSIO
       <input class="form-control me-2" type="text" placeholder="Search">
       <button class="btn btn-primary" type="button">Search</button>
     </form>
-    <div class="container-fluid">
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+      aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
       <ul class="navbar-nav">
         <li class="nav-item">
-          <a class="nav-link active" href="Añadir_planta.html">Agregar Planta</a>
+          <a class="nav-link active" href="Añadir_planta.php">Agregar Planta</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="Añadir-ubicacion.php">Agregar Ubicacion</a>
@@ -61,13 +73,14 @@ if (isset($_SESSION['nombre']) && isset($_SESSION['apellido']) && isset($_SESSIO
           <a class="nav-link disabled" href="#">Contactenos</a>
         </li>
       </ul>
-      <a href="CerrarSesion.php" class="btn btn-danger">Cerrar Sesión</a>
     </div>
+    <a href="CerrarSesion.php" class="btn btn-danger">Cerrar Sesión</a>
+
   </nav>
 
 
   <div class="btn btn-success position-fixed start-0 top-50 translate-middle-y m-3">
-    <a href="GreenkeeperIndex.html" class="text-white"><i class="bi bi-house"></i></a>
+    <a href="index.html" class="text-white"><i class="bi bi-house"></i></a>
   </div>
 
   <div class="perfil">
@@ -164,13 +177,13 @@ if (isset($_SESSION['nombre']) && isset($_SESSION['apellido']) && isset($_SESSIO
         </div>
       </div>
       <hr>
-      <!-- <article>
+       <article>
         <img class="imagen" src="img/imagen1.jpg">
-      </article> -->
+      </article>
     </div>
-  </div> -->
   </div>
-
+  </div>
+  -->
 
 
 

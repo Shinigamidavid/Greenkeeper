@@ -1,0 +1,16 @@
+section {
+    padding: 20px;
+    background-color: #f9f9f9;
+}
+
+article.texto {
+    border: 1px solid #ddd;
+    padding: 10px;
+    margin: 10px 0;
+}
+
+iframe {
+    width: 70%;
+    height: 500px;
+    border: none;
+}

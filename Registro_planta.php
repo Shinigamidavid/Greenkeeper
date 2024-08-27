@@ -1,21 +1,11 @@
-<!DOCTYPE html>
-<html lang="en">
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Registro_planta</title>
-    <!-- Latest compiled and minified CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Latest compiled JavaScript -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-    <link rel="stylesheet" href="css/estilosGreenkeeper.css">
-
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
-</head>
-
-<body>
     <?php
+
+    session_start();
+    if (!isset($correo)) {
+        header("location:Iniciarsesion.php?error=Debe Iniciar Sesión");
+    }
+
     include_once("conexion.php");
 
     // Depuración: Mostrar todos los datos recibidos por POST y FILES
@@ -26,10 +16,10 @@
 
 
     if (
-        isset($_POST["nombreComun"]) && isset($_POST["nombreCientifico"]) 
-        && isset($_POST["familia"]) && isset($_POST["genero"]) && 
-        isset($_POST["especie"]) && isset($_POST["variedad"]) && 
-        isset($_POST["tipo"])  && isset($_POST["frecuenciaRiego"])&& 
+        isset($_POST["nombreComun"]) && isset($_POST["nombreCientifico"])
+        && isset($_POST["familia"]) && isset($_POST["genero"]) &&
+        isset($_POST["especie"]) && isset($_POST["variedad"]) &&
+        isset($_POST["tipo"])  && isset($_POST["frecuenciaRiego"]) &&
         isset($_POST["descripcion"]) && isset($_FILES["imagen"])
     ) {
 
@@ -83,10 +73,3 @@
     }
 
     ?>
-
-
-
-
-</body>
-
-</html>

@@ -6,6 +6,7 @@ include_once("conexion.php");
 // Verifica si el usuario está autenticado
 if (!isset($_SESSION['correo'])) {
     die("Usuario no autenticado.");
+    
 }
 
 // Verifica si los datos y el archivo están disponibles
@@ -33,12 +34,13 @@ if (
 
             if ($conexion) {
                 // Usa una sentencia preparada para evitar inyecciones SQL
-                $sql = "INSERT INTO ubicacion (nombre, fecha, tipo, imagen, idUsuario) 
-                VALUES ('$nombre','$fecha', 'tipo', '$imagen', $idUsuario)";
+                $sql = "INSERT INTO ubicacion (nombre, fecha, tipo, imagen) 
+                VALUES ('$nombre','$fecha', '$tipo', '$imagen')";
                     $resultado = $conexion->query($sql);
 
                 if ($resultado) {
                     echo "Registro Satisfactorio";
+                    header('location: Mis_ubicaciones.html');
                 } else {
                     echo "Error en el registro: " . $stmt->error;
                 }

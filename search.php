@@ -1,8 +1,11 @@
 <?php
-include 'conexion.php'; // Tu archivo de conexión a la base de datos
+include 'conexion.php';
 
 if ($conexion->connect_error) {
-    die("Conexión fallida: " . $conexion->connect_error);
+    // Maneja el error, pero no lo imprimas directamente
+    error_log("Conexión fallida: " . $conexion->connect_error);
+    echo json_encode([]);
+    exit;
 }
 
 if (isset($_GET['term'])) {
@@ -17,10 +20,12 @@ if (isset($_GET['term'])) {
         }
     }
 
-    echo json_encode($data);
+    echo json_encode($data); // Solo devuelve JSON
 } else {
-    echo json_encode([]);
+    echo json_encode([]); // Asegúrate de siempre devolver un JSON válido
 }
 
 $conexion->close();
 ?>
+
+

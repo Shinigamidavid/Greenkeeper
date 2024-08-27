@@ -15,6 +15,7 @@
 
   <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
   <style>
+    
     .card {
       transition: transform 0.3s, box-shadow 0.3s;
       cursor: pointer;
@@ -89,80 +90,13 @@
     </div>
 
     <div class="container mt-5">
-      <h1 class="text-center">Green Keeper: Tarjetas de Plantas</h1>
+      <h1 class="text-center">Green Keeper: Inventario de Plantas</h1>
       <div class="row" id="cards-container">
         <!-- Aquí se insertarán las tarjetas generadas -->
       </div>
     </div>
-
-    <section id="galeria" class="container">
-      <div class="text-center pt-5">
-        <h1>Galería</h1>
-        <p>Información detallada sobre una amplia variedad de plantas, desde sus necesidades y caracteristicas.</p>
-      </div>
-      <div class="row">
-        <div class="col-lg-4 col-md-6 col-sm-12">
-          <img src="img/Items/PimulaRosaconAmarillo.jpeg" alt="Galeria imagen">
-        </div>
-        
-        <div class="col-lg-4 col-md-6 col-sm-12">
-          <img src="img/Items/PrimulaBlancaconRojoamarillo.jpeg" alt="Galeria imagen">
-        </div>
-        <div class="col-lg-4 col-md-6 col-sm-12">
-          <img src="img/Items/Prumulaazul.jpeg" alt="Galeria imagen">
-        </div>
-
-      </div>
-
-    </section>
-
-
     <hr>
     <div class="container col-md-4 offset-sm-4">
-      <div class="card text-center">
-        <div class="card-header">
-          <ul class="nav nav-tabs card-header-tabs">
-            <li class="nav-item">
-              <a class="nav-link active" aria-current="true" href="#">Active</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" aria-current="true" href="#">Active</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#">Link</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
-            </li>
-          </ul>
-        </div>
-        <div class="card-body">
-          <div class="card-1" style="width: 18rem;">
-            <img src="img/ConoceyRegistra.webp" class="card-img-top" alt="tu_planta">
-            <div class="card-body">
-              <h5 class="card-title">Registra y Conoce tus plantas por ubicacion</h5>
-              <p class="card-text">Añade nuevas plantas a tu inventario para un seguimiento detallado y personalizado.
-              </p>
-            </div>
-            <ul class="list-group list-group-flush">
-              <li class="list-group-item">id planta, nombre común , nombre científico,</li>
-              <li class="list-group-item">división ,orden ,familia, genero , especie , variedad ,</li>
-              <li class="list-group-item">fecha de plantación , estado </li>
-            </ul>
-            <div class="card-body">
-              <a href="#" class="card-link">Ver mis Ubicaciones</a>
-              <a href="Añadir_ubicacion.html" class="card-link">Añadir una ubicación</a>
-            </div>
-          </div>
-        </div>
-
-      </div>
-
-      <hr>
-
-      <br>
-
-      <hr>
 
       <!-- Botón para abrir el modal -->
       <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#exampleModal">
@@ -178,121 +112,76 @@
               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-              <form>
-                <div class="row mb-3">
-                  <div class="col-sm-6">
-                    <label for="nombre" class="form-label">Nombre comun</label>
-                    <input type="text" class="form-control" id="nombre" placeholder="Nombre planta">
-                  </div>
-                  <div class="col-sm-6">
-                    <label for="nombre" class="form-label">Nombre científico</label>
-                    <input type="text" class="form-control" id="nombre_cientifico" placeholder="Nombre planta">
-                  </div>
-                </div>
-                <br>
-
-                <div class="row my-3 text-center">
-                  <div class="col-sm-4 ">
-                    <div class="btn-group" role="group">
-                      <button id="btnGroupDrop1" type="button" class="btn btn-success dropdown-toggle"
-                        data-bs-toggle="dropdown" aria-expanded="false">Division</button>
-                      <ul class="dropdown-menu" aria-labelledby="btnGroupDrop1">
-                        <li><a class="dropdown-item" href="#">Opcion a-b</a></li>
-                        <li><a class="dropdown-item" href="#">Opcion a-b</a></li>
-                      </ul>
+              <div class="col-sm-6 offset-sm-3" id="formuplanta">
+                <form action="Registro_planta.php" tarjet="" method="post" enctype="multipart/form-data">
+                  <div class="row mb-3">
+                    <div class="col-sm-6">
+                      <label for="nombreComun" class="form-label">Nombre comun</label>
+                      <input type="text" class="form-control" name="nombreComun" id="nombreComun"
+                        placeholder="Nombre planta" required>
+                    </div>
+                    <div class="col-sm-6">
+                      <label for="nombreCientifico" class="form-label">Nombre científico</label>
+                      <input type="text" class="form-control" name="nombreCientifico" id="nombreCientifico"
+                        placeholder="Nombre planta">
                     </div>
                   </div>
-
-                  <div class="col-sm-4 ">
-                    <div class="btn-group" role="group">
-                      <button id="btnGroupDrop1" type="button" class="btn btn-success dropdown-toggle"
-                        data-bs-toggle="dropdown" aria-expanded="false">Orden</button>
-                      <ul class="dropdown-menu" aria-labelledby="btnGroupDrop1">
-                        <li><a class="dropdown-item" href="#">Opcion a-b</a></li>
-                        <li><a class="dropdown-item" href="#">Opcion a-b</a></li>
-                      </ul>
+                  <hr>
+                  <div class="row my-3 text-center">
+                    <div class="col-sm-4 ">
+                      <label for="familia" class="form-label">Familia</label>
+                      <input type="text" class="form-control" name="familia" id="familia" placeholder="Familia">
+                    </div>
+                    <div class="col-sm-4 ">
+                      <label for="genero" class="form-label">Genero</label>
+                      <input type="text" class="form-control" name="genero" id="genero" placeholder="Genero">
+                    </div>
+                    <div class="col-sm-4 ">
+                      <label for="especie" class="form-label">Especie</label>
+                      <input type="text" class="form-control" name="especie" id="especie" placeholder="Especie">
                     </div>
                   </div>
+                  <br>
+                  <div class="row my-3 text-center">
+                    <div class="col-sm-4 ">
+                      <label for="variedad" class="form-label">Variedad</label>
+                      <input type="text" class="form-control" name="variedad" id="variedad" placeholder="variedad">
+                    </div>
+                    <div class="col-sm-4 ">
+                      <label for="tipo" class="form-label">Tipo</label>
+                      <input type="text" class="form-control" name="tipo" id="tipo" placeholder="Tipo">
+                    </div>
+                    <div class="col-sm-4">
+                      <label for="frecuenciaRiego">Frecuencia de Riego (días):</label>
+                      <input type="number" id="frecuenciaRiego" name="frecuenciaRiego" min="1" max="7" required
+                        value="frecuenciaRiego">
+                    </div>
 
-                  <div class="col-sm-4 ">
-                    <div class="btn-group" role="group">
-                      <button id="btnGroupDrop1" type="button" class="btn btn-success dropdown-toggle"
-                        data-bs-toggle="dropdown" aria-expanded="false">familia</button>
-                      <ul class="dropdown-menu" aria-labelledby="btnGroupDrop1">
-                        <li><a class="dropdown-item" href="#">Opcion a-b</a></li>
-                        <li><a class="dropdown-item" href="#">Opcion a-b</a></li>
-                      </ul>
-                    </div>
                   </div>
-                </div>
-                <br>
-                <div class="row my-3 text-center">
-                  <div class="col-sm-4 ">
-                    <div class="btn-group" role="group">
-                      <button id="btnGroupDrop1" type="button" class="btn btn-success dropdown-toggle"
-                        data-bs-toggle="dropdown" aria-expanded="false">Genero</button>
-                      <ul class="dropdown-menu" aria-labelledby="btnGroupDrop1">
-                        <li><a class="dropdown-item" href="#">Dropdown link</a></li>
-                        <li><a class="dropdown-item" href="#">Dropdown link</a></li>
-                      </ul>
-                    </div>
+                  <div class="row">
+                    <label for="descripcion">Descripción:</label>
+                    <textarea id="descripcion" name="descripcion"></textarea>
                   </div>
 
-                  <div class="col-sm-4 ">
-                    <div class="btn-group" role="group">
-                      <button id="btnGroupDrop1" type="button" class="btn btn-success dropdown-toggle"
-                        data-bs-toggle="dropdown" aria-expanded="false">Especie</button>
-                      <ul class="dropdown-menu" aria-labelledby="btnGroupDrop1">
-                        <li><a class="dropdown-item" href="#">Dropdown link</a></li>
-                        <li><a class="dropdown-item" href="#">Dropdown link</a></li>
-                      </ul>
-                    </div>
+                  <hr>
+
+                  <div class="mb-3">
+                    <label for="imagen" class="form-label">Selecciona una imagen para cargar:</label>
+                    <input class="form-control" type="file" name="imagen" id="imagen" accept="image/*">
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-outline-warning" data-bs-dismiss="modal">Cerrar</button>
+                    <button type="submit" class="btn btn-success">Registrar</button>
+
                   </div>
 
-                  <div class="col-sm-4 ">
-                    <div class="btn-group" role="group">
-                      <button id="btnGroupDrop1" type="button" class="btn btn-success dropdown-toggle"
-                        data-bs-toggle="dropdown" aria-expanded="false">variedad</button>
-                      <ul class="dropdown-menu" aria-labelledby="btnGroupDrop1">
-                        <li><a class="dropdown-item" href="#">Dropdown link</a></li>
-                        <li><a class="dropdown-item" href="#">Dropdown link</a></li>
-                      </ul>
-                    </div>
-                  </div>
-                </div>
-
-                <hr>
-            </div>
-            <div class="mb-3">
-              <label for="plantacion">Fecha de plantacion</label>
-              <input type="date" id="plantacion" name="plantacion">
-            </div>
-            <hr>
-            <div class="mb-3">
-              <div class="div">
-                <label for="estado">Estado de la planta</label>
-              </div>
-              <div class="form-check form-switch">
-                <label class="form-check-label" for="activa">Activa</label>
-                <input class="form-check-input" name="estado" type="radio" id="activa" checked>
-
-              </div>
-              <div class="form-check form-switch">
-                <label class="form-check-label" for="inactiva">Inactiva</label>
-                <input class="form-check-input" name="estado" type="radio" id="inactiva">
-
+                </form>
               </div>
             </div>
 
-            </form>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-outline-warning" data-bs-dismiss="modal">Cerrar</button>
-            <button type="button" class="btn btn-success">Cargar</button>
           </div>
         </div>
       </div>
-    </div>
     </div>
     <hr>
 

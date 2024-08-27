@@ -1,11 +1,5 @@
 <?php
-// Conectar a la base de datos
-$host = 'localhost';
-$db = 'greenkeeper1';
-$user = 'root';
-$pass = '';
-
-$conexion = new mysqli($host, $user, $pass, $db);
+include 'conexion.php';
 
 if ($conexion->connect_error) {
     die("Conexión fallida: " . $conexion->connect_error);
