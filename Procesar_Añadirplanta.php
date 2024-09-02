@@ -21,8 +21,10 @@ $rowUsuario = $resultadoUsuario->fetch_assoc();
 $idUsuario = $rowUsuario['idUsuario'];
 
 // Insertar los datos en la tabla plantaUsuario
-$consultaInsertar = $conexion->prepare("INSERT INTO plantausuario (idUsuario, idPlanta, estado, fechaPlantacion, frecuencia, fechaCreacion) VALUES (?, ?, ?, ?, ?, ?)");
-$consultaInsertar->bind_param('iissss', $idUsuario, $idPlanta, $estado, $fechaPlantacion, $frecuenciaRiego, $fechaCreacion);
+$consultaInsertar = $conexion->prepare("INSERT INTO plantausuario (idUsuario, idPlanta, 
+estado, fechaPlantacion, frecuencia, fechaCreacion) VALUES (?, ?, ?, ?, ?, ?)");
+$consultaInsertar->bind_param('iissss', $idUsuario, $idPlanta, $estado, $fechaPlantacion, 
+$frecuenciaRiego, $fechaCreacion);
 
 if ($consultaInsertar->execute()) {
     echo "Planta registrada con éxito";

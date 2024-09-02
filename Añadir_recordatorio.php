@@ -2,15 +2,23 @@
 include 'conexion.php';
 session_start();
 $correo = $_SESSION['correo'];
+
 if (!isset($correo)) {
   header("location:Iniciarsesion.php?error=Debe Iniciar Sesión");
 }
+
+// Consulta para obtener el idUsuario
 $consulta = "SELECT * FROM usuario WHERE correo = '$correo'";
 $ejecuta = $conexion->query($consulta);
 $row = $ejecuta->fetch_assoc();
 
-//$fecha_actual = date('Y-m-d');
+if($row) {
+    // Almacenar el idUsuario en la sesión
+    $_SESSION['idUsuario'] = $row['idUsuario'];
+}
+
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -73,10 +81,11 @@ $row = $ejecuta->fetch_assoc();
                     </div>
                 </div>
 
-                <div class="row ms-3 text-center">
+                <div class="row justify-content-center align-items-center text-center">
                     <div class="col-sm-4 ">
                         <label for="fecha">Fecha</label>
-                        <input type="date" class="form-control" id="fecha" name="fecha" required>
+                        <input type="date" class="form-control" id="fecha" name="fecha" value="<?= date('Y-m-d'); ?>"
+                        readonly>
                     </div>
                     <div class="col-sm-4 ">
                         <label for="hora">Hora</label>
@@ -99,7 +108,7 @@ $row = $ejecuta->fetch_assoc();
                     <div class="col-sm-8 offset-sm-2 form-group">
                         <label for="buscarPlanta" class="form-label">Buscar una Planta</label>
                         <input type="text" class="form-control" id="buscarPlanta" placeholder="Nombre planta">
-                        <input type="text" id="idPlanta" name="idPlanta">
+                        <input type="text" id="idPlanta" name="idPlantaUsu">
                     </div>
                 </div>
 
@@ -120,7 +129,7 @@ $row = $ejecuta->fetch_assoc();
                     $("#buscarPlanta").autocomplete({
                         source: function (request, response) {
                             $.ajax({
-                                url: "buscar_planta.php", // Ruta al archivo PHP que maneja la búsqueda
+                                url: "buscar_plantaUsu.php", // Ruta al archivo PHP que maneja la búsqueda
                                 type: "POST",
                                 dataType: "json",
                                 data: {

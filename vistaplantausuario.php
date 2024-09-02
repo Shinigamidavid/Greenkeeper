@@ -1,3 +1,16 @@
+<?php
+session_start();
+include 'conexion.php';
+if (isset($_SESSION['correo']) ) {
+    // El usuario ha iniciado sesión correctamente
+} else {
+   
+    header("location:Iniciarsesion.php?error=Debe Iniciar Sesión");
+    exit(); 
+}
+
+$fecha_actual = date('Y-m-d');
+?>
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -31,11 +44,11 @@
                 <?php
                 // Suponiendo que ya tienes una conexión a la base de datos y has consultado las plantas del usuario
                 $idUsuario = $_SESSION['idUsuario']; // Obtén el ID del usuario autenticado
-                $query = "SELECT p.nombreComun, p.nombreCientifico, pu.tipo, pu.frecuenciaRiego, pu.idPlantaUsuario
+                $query = "SELECT pu.nombreComun, p.nombreCientifico, pu.tipo, pu.frecuenciaRiego, pu.idPlantaUsuario
                           FROM plantaUsuario pu
                           INNER JOIN planta p ON pu.idPlanta = p.idPlanta
                           WHERE pu.idUsuario = $idUsuario";
-                $result = mysqli_query($conn, $query);
+                $result = mysqli_query($conexion, $query);
 
                 if (mysqli_num_rows($result) > 0) {
                     while ($row = mysqli_fetch_assoc($result)) {

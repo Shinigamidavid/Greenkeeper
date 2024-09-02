@@ -2,34 +2,58 @@
 include 'conexion.php';
 session_start();
 
-// Obtener el correo del usuario logueado
 $correo = $_SESSION['correo'];
 
-// Obtener los datos del formulario
-$idPlanta = intval($_POST['idPlantaUsu']);  // Asegúrate de incluir este campo oculto en el formulario
-$idRecordatorio = $_POST['frecuencia'];
-$estado = $_POST['estado'];
-$fecha = $_POST['fecha'];
-$hora = $_POST['hora'];
+if (
+    isset($_POST['fecha']) && isset($_POST['frecuencia']) &&
+    isset($_POST['idPlantaUsu']) && isset($_POST['estado']) &&
+    isset($_POST['hora'])
+) {
 
-// Obtener el ID del usuario a partir del correo
-$consultaUsuario = $conexion->prepare("SELECT idUsuario FROM usuario WHERE correo = ?");
-$consultaUsuario->bind_param('s', $correo);
-$consultaUsuario->execute();
-$resultadoUsuario = $consultaUsuario->get_result();
-$rowUsuario = $resultadoUsuario->fetch_assoc();
-$idUsuario = $rowUsuario['idUsuario'];
+    $fechaRegistro = $_POST['fecha'];
+    $frecuencia = $_POST['frecuencia'];
+    $idPlantaUsu = $_POST['idPlantaUsu'];  // Campo oculto con el ID de la planta
+    $estado = $_POST['estado'];
+    $hora = $_POST['hora'];
 
-// Insertar los datos en la tabla plantaUsuario
-$consultaInsertar = $conexion->prepare("INSERT INTO recordatorio (idRecordatorio, estado, fecha, hora) VALUES ( ?, ?, ?, ?)");
-$consultaInsertar->bind_param('isss', $idRecordatorio, $estado, $fecha, $hora);
+    // Calcula la fechaResultado en PHP
+    $fechaResultado = date('Y-m-d', strtotime($fechaRegistro . " + $frecuencia days"));
 
-if ($consultaInsertar->execute()) {
-    echo "Recordatorio registrado con éxito";
+    // Obtener el ID del usuario a partir del correo
+    $consultaUsuario = $conexion->prepare("SELECT idUsuario FROM usuario WHERE correo = ?");
+    $consultaUsuario->bind_param('s', $correo);
+    $consultaUsuario->execute();
+    $resultadoUsuario = $consultaUsuario->get_result();
+    $rowUsuario = $resultadoUsuario->fetch_assoc();
+    $idUsuario = $rowUsuario['idUsuario'];
+    $consultaUsuario->close();
+
+    // Insertar el recordatorio en la tabla recordatorio
+    $consultaInsertar = $conexion->prepare("INSERT INTO recordatorio (estado, fecha, frecuencia, hora) VALUES (?, ?, ?, ?)");
+    $consultaInsertar->bind_param('ssis', $estado, $fechaResultado, $frecuencia, $hora);
+
+    if ($consultaInsertar->execute()) {
+        // Obtener el idRecordatorio generado
+        $idRecordatorio = $consultaInsertar->insert_id;
+
+        // Actualizar la tabla plantaUsuario con el idRecordatorio
+        $consultaActualizar = $conexion->prepare("UPDATE plantausuario SET idRecordatorio = ? WHERE idPlantaUsu = ?");
+        $consultaActualizar->bind_param('ii', $idRecordatorio, $idPlantaUsu);
+
+        if ($consultaActualizar->execute()) {
+            header('location: Perfil.php?registroR=exitoso');
+            exit();
+        } else {
+            echo "Error al asignar el recordatorio a la planta: " . $consultaActualizar->error;
+        }
+
+        $consultaActualizar->close();
+    } else {
+        echo "Error al registrar el Recordatorio: " . $consultaInsertar->error;
+    }
+
+    $consultaInsertar->close();
+    $conexion->close();
 } else {
-    echo "Error al registrar el Recordatorio: " . $conexion->error;
+    echo "Datos del formulario no están definidos correctamente.";
 }
-
-$consultaInsertar->close();
-$conexion->close();
-?>

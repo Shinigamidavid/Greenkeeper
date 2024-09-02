@@ -107,7 +107,31 @@
     <a href="Iniciarsesion.php" class="btn btn-primary ml-lg-auto">Iniciar sesión</a>
 
   </nav>
-
+  <div class="modal fade" id="registroExitosoModal" tabindex="-1" aria-labelledby="registroExitosoModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="registroExitosoModalLabel">Registro Exitoso</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                ¡Tu registro ha sido exitoso!
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Cerrar</button>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+  // Detectar el parámetro en la URL
+  const urlParams = new URLSearchParams(window.location.search);
+  if (urlParams.has('registro') && urlParams.get('registro') === 'exitoso') {
+      // Mostrar el modal si el registro fue exitoso
+      var registroExitosoModal = new bootstrap.Modal(document.getElementById('registroExitosoModal'));
+      registroExitosoModal.show();
+  }
+</script>
   <div class="container mt-5">
     <!-- Aquí se mostrará el modal con los resultados -->
   </div>

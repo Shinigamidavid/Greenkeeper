@@ -1,18 +1,3 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Registro_usuario</title>
-    <!-- Latest compiled and minified CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Latest compiled JavaScript -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-    <link rel="stylesheet" href="css/estilosGreenkeeper.css">
-    
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
-</head>
-<body>
 <?php
 include_once("conexion.php");
 
@@ -43,9 +28,9 @@ if(isset($_POST["nombre"]) && isset($_POST["apellido"]) && isset($_POST["nacimie
                 '$correo','$sexo','$noCelular',2,'$password')";
         $resultado = $conexion->query($sql);
         
-        if($resultado) {
-            echo "Registro Satisfactorio";
-            header('location: GreenkeeperIndex.html');
+        if ($resultado) {
+            header('location: index.html?registro=exitoso');
+            exit(); // Asegura que se detiene la ejecución después de la redirección
         } else {
             echo "Error en el registro: " . $conexion->error;
         }
