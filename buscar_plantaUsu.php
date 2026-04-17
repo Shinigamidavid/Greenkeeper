@@ -15,7 +15,7 @@ if (isset($_SESSION['idUsuario'])) {
 
         // Consulta con JOIN para obtener las plantas del usuario en la sesión
         $sql = "
-            SELECT pu.*, p.nombreComun
+            SELECT pu.*, p.nombreComun, pu.frecuencia
             FROM plantausuario pu
             JOIN planta p ON pu.idPlanta = p.idPlanta
             WHERE p.nombreComun LIKE '%$nombreComun%' AND pu.idUsuario = '$idUsuario'
@@ -26,11 +26,19 @@ if (isset($_SESSION['idUsuario'])) {
         $plantas = [];
         if ($result->num_rows > 0) {
             while ($row = $result->fetch_assoc()) {
-                $plantas[] = $row;
+                // Asegúrate de que los datos necesarios están en el array
+                $plantas[] = [
+                    'idPlanta' => $row['idPlanta'],
+                    'nombreComun' => $row['nombreComun'],
+                    'frecuencia' => $row['frecuencia']  // Incluye la frecuencia para el autocompletado
+                ];
             }
         }
 
+        // Devuelve los datos en formato JSON
         echo json_encode($plantas);
+    } else {
+        echo json_encode(['error' => 'No se proporcionó el nombre de la planta']);
     }
 
     $conexion->close();

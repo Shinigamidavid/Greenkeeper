@@ -52,7 +52,7 @@ if (isset($_SESSION['correo'])) {
 
 
   <nav class="navbar navbar-expand-md navbar-dark bg-success sticky-top">
-    <a class="navbar-brand" href="GreenkeeperIndex.html">Greenkeeper</a>
+    <a class="navbar-brand" href="index.html">Greenkeeper</a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
       aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
@@ -73,13 +73,14 @@ if (isset($_SESSION['correo'])) {
         </li>
       </ul>
     </div>
-    <button class="btn btn-primary d-flex " onclick="history.back() ">Volver</button>
+    <!-- <button class="btn btn-primary d-flex " onclick="history.back() ">Volver</button> -->
+
   </nav>
 
 
 
   <div class="d-flex justify-content-center align-items-center ">
-    <form class="col-sm-6 my-5" action="validate.php" method="post" id="formuinicio">
+    <form class="col-sm-6 my-5" action="validar_login.php" method="post" id="formuinicio" class="was-validated">
       <h1 class="text-center m-2 text-warning ">Inicio de sesión</h1>
       <hr>
       <?php
@@ -91,22 +92,26 @@ if (isset($_SESSION['correo'])) {
 
       ?>
       <div class="form-floating mt-3 mb-3 mx-4">
-        <input type="email" name="correo" class="form-control" id="correo" placeholder="name@example.com">
+        <input type="email" name="correo" class="form-control" id="correo" placeholder="name@example.com" required>
         <label for="correo">Ingresa tu Correo</label>
+        <div class="invalid-feedback">Por favor, ingresa un correo electrónico válido.</div>
       </div>
 
-      <div class="col-sm-4 offset-sm-4 mb-2"><a href="" class="text-warning ">Olvidaste la contraseña?</a></div>
+      <div class="col-sm-4 offset-sm-4 mb-2">
+        <a href="" class="text-warning ">Olvidaste la contraseña?</a>
+      </div>
 
       <div class="form-floating input-wrapper mx-5 mb-3">
-        <input type="password" name="password" class="form-control" id="password" placeholder="Password">
+        <input type="password" name="password" class="form-control" id="password" placeholder="Password" minlength="5" required>
         <label for="password">Contraseña</label>
         <i class="bi bi-eye" id="togglePassword"></i>
+        <div class="invalid-feedback">La contraseña debe tener al menos 8 caracteres.</div>
       </div>
 
       <div class="row mx-5">
         <div class="col-sm-6 d-flex justify-content-start">
           <div class="d-grid gap-3">
-            <a href="Registro_usuario.html">Crear Cuenta</a>
+            <a href="Registro_usuario.html" class="btn btn-outline-info">Crear Cuenta</a>
           </div>
         </div>
         <div class="col-sm-6 d-flex justify-content-end">
@@ -116,10 +121,6 @@ if (isset($_SESSION['correo'])) {
             <button type="submit" class="btn btn-success btn-block">Inciar Sesión</button>
           </div>
         </div>
-      </div>
-      <hr>
-      <div class="col-sm-4 offset-sm-4 text-center ">
-        <a href="GreenkeeperIndex.html">Volver al incio </a>
       </div>
     </form>
 

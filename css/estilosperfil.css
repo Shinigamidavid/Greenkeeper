@@ -1,3 +1,13 @@
+#miContenedorP {
+    /* height: 200px; */
+    background-image: url(/img/green\ KEEPER.png);
+    background-size: 100% 300%; /* Ancho al 100% y altura al 90% */
+    background-repeat: no-repeat;
+    background-position: center center;
+    
+}
+
+
 .perfil{
     margin: 0;
     padding: 0;

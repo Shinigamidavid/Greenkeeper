@@ -27,5 +27,3 @@ if (isset($_GET['term'])) {
 
 $conexion->close();
 ?>
-
-

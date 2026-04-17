@@ -129,22 +129,11 @@
 </body>
 </html>
 
-// handler.php
+handler.php
 
 <?php
 // Configuración de la base de datos
-$servername = "localhost";
-$username = "usuario";
-$password = "contraseña";
-$dbname = "nombre_base_datos";
-
-// Crear conexión
-$conn = new mysqli($servername, $username, $password, $dbname);
-
-// Verificar conexión
-if ($conn->connect_error) {
-    die("Conexión fallida: " . $conn->connect_error);
-}
+include 'conexion.php';
 
 // Obtener datos del POST
 $days = $_POST['days'];
@@ -165,11 +154,11 @@ if ($action === 'captar') {
     $sql = "UPDATE recordatorio SET proximaEjecucion='" . $next_execution->format('Y-m-d H:i:s') . "' WHERE idRecordatorio=$idRecordatorio";
 }
 
-if ($conn->query($sql) === TRUE) {
+if ($conexion->query($sql) === TRUE) {
     echo "Temporizador actualizado correctamente.";
 } else {
-    echo "Error al actualizar el temporizador: " . $conn->error;
+    echo "Error al actualizar el temporizador: " . $conexion->error;
 }
 
-$conn->close();
+$conexion->close();
 ?>

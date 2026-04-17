@@ -1,13 +1,16 @@
 <?php
 include 'conexion.php';
 session_start();
-  $correo = $_SESSION['correo'];
- if(!isset($correo)){
-     header("location:Iniciarsesion.php?error=Debe Iniciar Sesión");
- }
- $consulta = "SELECT * FROM usuario WHERE correo = '$correo'";
- $ejecuta = $conexion->query ($consulta);
- $row = $ejecuta->fetch_assoc();
+if (!isset($_SESSION['correo'])) {
+    $_SESSION['urlPrevio'] = $_SERVER['REQUEST_URI'];
+    header("location:Iniciarsesion.php?error=Debe Iniciar Sesión");
+    exit();
+}
+$correo = $_SESSION['correo'];
+
+$consulta = "SELECT * FROM usuario WHERE correo = '$correo'";
+$ejecuta = $conexion->query($consulta);
+$row = $ejecuta->fetch_assoc();
 
 $fecha_actual = date('Y-m-d');
 ?>
@@ -51,9 +54,33 @@ $fecha_actual = date('Y-m-d');
             </div>
         </div>
     </div>
+    <nav class="navbar navbar-expand-md bg-success navbar-dark sticky-top">
+        <a class="navbar-brand" href="Perfil.php">Greenkeeper</a>
+        <form class="d-flex my-2 my-lg-0 ml-auto">
+            <input class="form-control me-2" type="search" id="nombreComun" name="nombreComun"
+                placeholder="Buscar planta" aria-label="Buscar">
+            <button class="btn btn-outline-primary my-2 my-sm-0" type="button" id="buscarBtn">Buscar</button>
+        </form>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link active" href="Añadir_recordatorio.php">Agregar Recordatorio</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" href="Añadir_planta.php">Agregar Planta</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link disabled" href="#">Contactenos</a>
+                </li>
+            </ul>
+        </div>
+        <a href="CerrarSesion.php" class="btn btn-danger">Cerrar Sesión</a>
 
-    <button class="btn btn-primary d-flex " onclick="history.back() ">Volver</button>
-
+    </nav>
 
     <div class="btn btn-success position-fixed start-0 top-50 translate-middle-y m-3">
         <a href="GreenkeeperIndex.html" class="text-white"><i class="bi bi-house"></i></a>

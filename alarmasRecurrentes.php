@@ -1,4 +1,4 @@
-<!-- <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -75,9 +75,7 @@
 </body>
 </html>
 
-
-// 
-<hr> -->
+<hr>
 
 <?php
  require 'conexion.php';
@@ -87,7 +85,7 @@
 $now = new DateTime();
 
 // Consultar alarmas
-$sql = "SELECT idRecordatorio, hora, fecha, frecuenciaRiego FROM recordatorio";
+$sql = "SELECT idRecordatorio, hora, fecha, frecuencia, estado FROM recordatorio";
 $result = $conexion->query($sql);
 
 if ($result->num_rows > 0) {

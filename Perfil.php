@@ -1,13 +1,33 @@
 <?php
+include 'conexion.php';
 session_start();
-if (isset($_SESSION['correo']) ) {
-    // El usuario ha iniciado sesión correctamente
+if (isset($_SESSION['correo'])) {
+  // El usuario ha iniciado sesión correctamente
 } else {
-   
-    header("location:Iniciarsesion.php?error=Debe Iniciar Sesión");
-    exit(); 
-}
 
+  header("location:Iniciarsesion.php?error=Debe Iniciar Sesión");
+  exit();
+}
+// Obtener el idUsuario del usuario autenticado
+$idUsuario = $_SESSION['idUsuario']; // Asegúrate de que 'idUsuario' esté en la sesión
+
+// Consultar el nombre del rol en la base de datos
+$query = "SELECT r.nombre
+          FROM usuario u
+          JOIN rol r ON u.idRol = r.idRol
+          WHERE u.idUsuario = $idUsuario";
+
+// Ejecutar la consulta
+$result = $conexion->query($query);
+
+if ($result) {
+    // Obtener el nombre del rol
+    $row = $result->fetch_assoc();
+    $_SESSION['rol'] = $row['nombre'];
+} else {
+    // Manejar el error en caso de fallo en la consulta
+    echo "Error en la consulta: " . $conexion->error;
+}
 $fecha_actual = date('Y-m-d');
 ?>
 
@@ -37,31 +57,66 @@ $fecha_actual = date('Y-m-d');
 
   <link rel="stylesheet" href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css">
   <link rel="stylesheet" href="css/estilosperfil.css">
+  <style>
+        /* .card {
+            display: flex;
+            flex-direction: row;
+            transition: transform 0.3s, box-shadow 0.3s;
+            cursor: pointer;
+            background: radial-gradient(circle at center, #ffffff, #f8f9fa, #e0e0e0);
+            overflow: hidden;
+        }
 
+        .card:hover {
+            transform: scale(1.05);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        }
+
+        .card-body {
+            max-height: none;
+            overflow: visible;
+            margin-left: 15px;
+        }
+
+        .img-fluid {
+            max-width: 100%;
+            height: auto;
+        } */
+
+        .ui-autocomplete {
+            z-index: 1050;
+            /* Ajusta el valor según tus necesidades */
+            position: absolute;
+            /* Asegúrate de que sea 'absolute' para que se posicione correctamente */
+        }
+    </style>
 </head>
 
 <body>
 
-  <div class="container p-4 my-1 text-light" id="miContenedor">
+  <div class="container p-4 my-1 text-light" id="miContenedorP">
     <div class="row align-items-center">
       <div class="col-sm-2 d-flex justify-content-center align-items-center">
         <img src="img/HojaBegonia.jpeg" class="rounded-circle logo" alt="Logo">
       </div>
       <div class="col-sm-8">
-        <h1 class="display-1 text-center">GREENKEEPER</h1>
+        <!-- <h1 class="display-1 text-center">GREENKEEPER</h1> -->
       </div>
       <div class="col-sm-2">
-        <h1>Usuario</h1>
-        <p class="text-warning p-4"><?php echo $_SESSION['idUsuario'] . " " .$_SESSION['nombre'] . " " . $_SESSION['apellido']; ?></p>
+        <h2 class="text-info"><?php echo $_SESSION['rol']; ?></h2>
+
+        <p class="text-warning p-4"><?php echo $_SESSION['idUsuario'] . " " . $_SESSION['nombre'] . " " . $_SESSION['apellido']; ?></p>
 
       </div>
     </div>
   </div>
 
   <nav class="navbar navbar-expand-md bg-success navbar-dark sticky-top">
-    <form class="d-flex">
-      <input class="form-control me-2" type="text" placeholder="Search">
-      <button class="btn btn-primary" type="button">Search</button>
+    <a class="navbar-brand" href="index.html">Greenkeeper</a>
+    <form class="d-flex my-2 my-lg-0 ml-auto">
+      <input class="form-control me-2" type="search" id="nombreComun" name="nombreComun" placeholder="Buscar planta"
+        aria-label="Buscar">
+      <button class="btn btn-outline-primary my-2 my-sm-0" type="button" id="buscarBtn">Buscar</button>
     </form>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
       aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -77,6 +132,9 @@ $fecha_actual = date('Y-m-d');
         </li>
         <li class="nav-item">
           <a class="nav-link " href="Añadir_recordatorio.php">Agregar Recordatorio</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="Mis_plantas.html">Plantas de Usuario</a>
         </li>
         <li class="nav-item">
           <a class="nav-link disabled" href="#">Contactenos</a>
@@ -118,7 +176,74 @@ $fecha_actual = date('Y-m-d');
       registroExitosoModal.show();
     }
   </script>
-  
+<!-- Modal Planta Usuario -->
+<div class="modal fade" id="plantaModal" tabindex="-1" role="dialog" aria-labelledby="plantaModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="plantaModalLabel">Detalles de la Planta</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body" id="resultadoBusqueda">
+                    <!-- Resultados de la búsqueda se mostrarán aquí -->
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        $(document).ready(function () {
+            // Autocompletado
+            $('#nombreComun').autocomplete({
+                source: function (request, response) {
+                    $.ajax({
+                        url: 'buscar_planta.php',
+                        method: 'GET',
+                        dataType: 'json', // Asegúrate de tener este tipo de datos
+                        data: {
+                            term: request.term
+                        },
+                        success: function (data) {
+                            response(data);
+                        },
+                        error: function (xhr, status, error) {
+                            console.error("Error en AJAX:", xhr.responseText);
+                        }
+                    });
+                }
+            });
+
+
+            $('#nombreComun').on('keypress', function (e) {
+                if (e.which === 13) {
+                    e.preventDefault();
+                    $('#buscarBtn').click();
+                }
+            });
+
+            $('#buscarBtn').click(function () {
+                var nombreComun = $('#nombreComun').val();
+                if (nombreComun) {
+                    $.ajax({
+                        url: 'getPlantaUsu.php',
+                        method: 'GET',
+                        data: {
+                            nombreComun: nombreComun
+                        },
+                        success: function (data) {
+                            $('#resultadoBusqueda').html(data);
+                            var myModal = new bootstrap.Modal(document.getElementById('plantaModal'));
+                            myModal.show();
+                        },
+                        error: function (xhr, status, error) {
+                            console.error(xhr);
+                        }
+                    });
+                }
+            });
+        });
+
+    </script>
   <div class="perfil">
     <div class="container custom-width mt-5 d-flex justify-content-between position-relative">
       <div class="card">

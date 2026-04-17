@@ -1,12 +1,11 @@
 body{
-    background-image: url(/img/Fondos/Ver-fondopinoslago.jpg);
+    background-image: url("../img/Fondos/Ver-fondopinoslago.jpg");
     background-size: cover;
     /* background-color: beige; */
 }
-
 #miContenedor {
     /* height: 200px; */
-    background-image: url(/img/Fondos/horArbolesdesdearribazoom.png);
+    background-image: url("../img/Fondos/horArbolesdesdearribazoom.png");
     background-size: cover;
     background-repeat: no-repeat;
     
@@ -21,7 +20,7 @@ body{
     top: 50%; /* Posición al 50% de la altura de la ventana */
     transform: translateY(-50%); /* Centrar verticalmente */
     right: 0;
-    z-index: 1000; /* Asegura que el botón esté encima del contenido */
+    z-index: 1100; /* Asegura que el botón esté encima del contenido */
     margin: 10px; /* Margen opcional */
     
 }
@@ -58,7 +57,7 @@ body{
 }
 
 #formuinicio {
-    background-image:url(/img/Fondos/hor\ Entreel\ bosque-unsplash.jpg);
+    background-image:url("../img/Fondos/hor\ Entreel\ bosque-unsplash.jpg");
     background-size: cover;
     background-position: center;
     border-style: outset;
@@ -109,7 +108,7 @@ input {
 }
 
 #error404 {
-    background-image: url(/img/Fondos/hor-hojassecas.jpg);
+    background-image: url("../img/Fondos/hor-hojassecas.jpg");
     background-size: cover;
     border-style: outset;
     border-color: gray;

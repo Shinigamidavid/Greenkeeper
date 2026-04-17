@@ -66,9 +66,9 @@
   </div>
 
   <nav class="navbar navbar-expand-md navbar-dark bg-success sticky-top">
-    <a class="navbar-brand" href="#">Greenkeeper</a>
+    <a class="navbar-brand" href="Perfil.php">Greenkeeper</a>
     <form class="d-flex my-2 my-lg-0 ml-auto">
-      <input class="form-control me-2" type="search" id="nombreComun" name="nombreComun" placeholder="Buscar planta"
+      <input class="form-control me-2" type="search" id="nombreComun" name="nombreComun" placeholder="Buscar Planta"
         aria-label="Buscar">
       <button class="btn btn-outline-primary my-2 my-sm-0" type="button" id="buscarBtn">Buscar</button>
     </form>
@@ -81,62 +81,60 @@
         <li class="nav-item active">
           <a class="nav-link" href="Registro_usuario.html">Registrarse</a>
         </li>
-        <!-- <li class="nav-item active">
-          <a class="nav-link" href="GreenkeeperIndex.html">Inicio</a>
-        </li> -->
         <li class="nav-item">
           <a class="nav-link" href="Inventario_plantas.html">Inventario</a>
         </li>
-        <li class="nav-item">
+        <!-- <li class="nav-item">
           <a class="nav-link" href="#">Adquirir</a>
-        </li>
+        </li> -->
         <li class="nav-item">
-          <a class="nav-link" href="#">Recordatorios</a>
+          <a class="nav-link" href="timerView.php">Recordatorios</a>
         </li>
         <li class="nav-item disabled">
           <a class="nav-link" href="#">Contáctenos</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="error404.html">Error404</a>
+          <a class="nav-link" href="Mis_plantas.html">Plantas de Usuario</a>
         </li>
-        <li class="nav-item">
+        <!--<li class="nav-item">
           <a class="nav-link" href="error500.html">Error500</a>
-        </li>
+        </li> -->
       </ul>
     </div>
     <a href="Iniciarsesion.php" class="btn btn-primary ml-lg-auto">Iniciar sesión</a>
 
   </nav>
-  <div class="modal fade" id="registroExitosoModal" tabindex="-1" aria-labelledby="registroExitosoModalLabel" aria-hidden="true">
+  <div class="modal fade" id="registroExitosoModal" tabindex="-1" aria-labelledby="registroExitosoModalLabel"
+    aria-hidden="true">
     <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="registroExitosoModalLabel">Registro Exitoso</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                ¡Tu registro ha sido exitoso!
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Cerrar</button>
-            </div>
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="registroExitosoModalLabel">Registro Exitoso</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
+        <div class="modal-body">
+          ¡Tu registro ha sido exitoso!
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Cerrar</button>
+        </div>
+      </div>
     </div>
-</div>
-<script>
-  // Detectar el parámetro en la URL
-  const urlParams = new URLSearchParams(window.location.search);
-  if (urlParams.has('registro') && urlParams.get('registro') === 'exitoso') {
+  </div>
+  <script>
+    // Detectar el parámetro en la URL
+    const urlParams = new URLSearchParams(window.location.search);
+    if (urlParams.has('registro') && urlParams.get('registro') === 'exitoso') {
       // Mostrar el modal si el registro fue exitoso
       var registroExitosoModal = new bootstrap.Modal(document.getElementById('registroExitosoModal'));
       registroExitosoModal.show();
-  }
-</script>
+    }
+  </script>
   <div class="container mt-5">
     <!-- Aquí se mostrará el modal con los resultados -->
   </div>
 
-  <!-- Modal -->
+  <!-- Modal Busqueda Planta-->
   <div class="modal fade" id="plantaModal" tabindex="-1" role="dialog" aria-labelledby="plantaModalLabel"
     aria-hidden="true">
     <div class="modal-dialog" role="document">
@@ -206,7 +204,7 @@
   </script>
 
   <div class="btn btn-success position-fixed end-0 top-50 translate-middle-y m-3">
-    <a href="GreenkeeperIndex.html" class="text-white"><i class="bi bi-house"></i></a>
+    <a href="index.html" class="text-white"><i class="bi bi-house"></i></a>
   </div>
 
 
@@ -294,7 +292,7 @@
           </map>
         </div>
         <div>
-          <h2>Inspirate (catalogo)</h2>
+          <h2>Visitar Galeria</h2>
           <img src="img/Galeria2.webp" class="img-fluid mx-auto d-block" style="width: 60%;" alt="Imagen galeria"
             usemap="#inventario">
           <map name="inventario">
@@ -329,7 +327,7 @@
         <div class="col-md-4">
           <h5>Enlaces Rápidos</h5>
           <ul class="list-unstyled">
-            <li><a href="GreenkeeperIndex.html" class="text-white">Inicio</a></li>
+            <li><a href="index.html" class="text-white">Inicio</a></li>
             <li><a href="#" class="text-white">Sobre Nosotros</a></li>
             <li><a href="#" class="text-white">Servicios</a></li>
             <li><a href="#" class="text-white">Blog</a></li>
